@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://6k70t5p3vfxi"]
+
+[ext_resource type="Script" uid="uid://bxvq0w14btuew" path="res://Scripts/SkiLiftEnd.gd" id="1_mutmt"]
+[ext_resource type="Script" uid="uid://mgo8ru2j2db6" path="res://Scripts/EditorGizmos.gd" id="2_ytdxx"]
+[ext_resource type="Texture2D" uid="uid://ca7ps7cm6un8" path="res://Textures/Div/circle_1.png" id="3_urrtl"]
+[ext_resource type="Texture2D" uid="uid://1nm30va5tfnj" path="res://Textures/Div/arrow_1.png" id="4_wjscw"]
+[ext_resource type="Texture2D" uid="uid://ddq4kbln3d5ke" path="res://Textures/Div/ski_lift_pin.png" id="5_odpq2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cjr2h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mutmt"]
+size = Vector3(2, 1, 2)
+
+[node name="Ski Lift End" type="Node3D" node_paths=PackedStringArray("anchor")]
+script = ExtResource("1_mutmt")
+anchor = NodePath("Anchor")
+
+[node name="Anchor" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.17372912, 0, 0, 0, 0.17372912, 0, 0, 0, 0.17372912, -1.2640815, 1.2281778, 0.006754279)
+visible = false
+mesh = SubResource("BoxMesh_cjr2h")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0029173791, 0.5, 0)
+shape = SubResource("BoxShape3D_mutmt")
+
+[node name="Gizmos" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ytdxx")
+
+[node name="Sprite3D" type="Sprite3D" parent="Gizmos"]
+transform = Transform3D(3, 0, 0, 0, -1.3113416e-07, 3, 0, -3, -1.3113416e-07, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("3_urrtl")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Gizmos"]
+transform = Transform3D(-3, 2.6226832e-07, 1.1464117e-14, 1.2705494e-21, -1.3113416e-07, 3, 2.6226832e-07, 3, 1.3113416e-07, 0, 0, 2)
+texture_filter = 0
+texture = ExtResource("4_wjscw")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Gizmos"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.216, 0)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_odpq2")

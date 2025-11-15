@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://1vk0voqo7q3n"]
+
+[ext_resource type="Script" uid="uid://dpfpjcdums6fu" path="res://Scripts/Board2.gd" id="1_mpxtb"]
+[ext_resource type="PackedScene" uid="uid://j6q406ltbkwa" path="res://Blender/snowboard.blend" id="2_jrn86"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mpxtb"]
+radius = 0.1
+
+[node name="Board" type="Node3D"]
+physics_interpolation_mode = 1
+script = ExtResource("1_mpxtb")
+
+[node name="Mesh" type="Node3D" parent="."]
+transform = Transform3D(1, 2.1175824e-22, 3.5527137e-15, 0, 1.0000001, 3.5527137e-15, -3.5527137e-15, 0, 1, -0.00064086914, 0.05000569, -6.1035156e-05)
+
+[node name="snowboard" parent="Mesh" instance=ExtResource("2_jrn86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07632751, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 2.1175824e-22, 3.5527137e-15, 0, 1.0000001, 3.5527137e-15, -3.5527137e-15, 0, 1, -0.00064086914, 0.05752198, -6.1035156e-05)
+shape = SubResource("SphereShape3D_mpxtb")
+
+[node name="RayCast3D" type="RayCast3D" parent="Shape"]
+transform = Transform3D(1, -2.1175821e-22, -3.5527137e-15, -1.2621773e-29, 0.9999999, -3.5527133e-15, 3.5527137e-15, -7.523163e-37, 1, 0.0023911, -0.057521973, -0.0024351105)

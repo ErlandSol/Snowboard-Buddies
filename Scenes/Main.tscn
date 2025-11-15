@@ -1,0 +1,147 @@
+[gd_scene load_steps=7 format=3 uid="uid://ndw1jryeo11u"]
+
+[ext_resource type="Script" uid="uid://b47jpjs2x1mg2" path="res://Scenes/Main.gd" id="1_bmxlf"]
+[ext_resource type="Script" uid="uid://bsrbx40sksmph" path="res://Scripts/LevelContainer.gd" id="2_pbw6q"]
+[ext_resource type="Script" uid="uid://bbucmjjyvixrl" path="res://Scripts/SlopePath.gd" id="4_rgh2o"]
+[ext_resource type="Script" uid="uid://cnd4tgpvkbsi3" path="res://Scripts/ViewportManager.gd" id="16_2w5on"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2w5on"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.2547831, 0.39280102, 0.5670304, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgh2o"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_bmxlf")
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="Panel2" type="Panel" parent="Menu"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2w5on")
+
+[node name="Modes" type="VBoxContainer" parent="Menu/Panel2"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.053645834
+anchor_bottom = 0.09351852
+
+[node name="Singleplayer" type="Button" parent="Menu/Panel2/Modes"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Multiplayer")
+focus_neighbor_bottom = NodePath("../HBoxContainer/Splitscreen")
+text = "Singleplayer"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Panel2/Modes"]
+layout_mode = 2
+
+[node name="Splitscreen" type="Button" parent="Menu/Panel2/Modes/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../../Singleplayer")
+focus_neighbor_right = NodePath("../HBoxContainer/2")
+focus_neighbor_bottom = NodePath("../../Multiplayer")
+text = "Splitscreen
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Panel2/Modes/HBoxContainer"]
+visible = false
+layout_direction = 2
+layout_mode = 2
+alignment = 1
+
+[node name="2" type="Button" parent="Menu/Panel2/Modes/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "2"
+
+[node name="3" type="Button" parent="Menu/Panel2/Modes/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "3
+"
+
+[node name="4" type="Button" parent="Menu/Panel2/Modes/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "4
+"
+
+[node name="Multiplayer" type="Button" parent="Menu/Panel2/Modes"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer/Splitscreen")
+focus_neighbor_bottom = NodePath("../Singleplayer")
+text = "Multiplayer
+"
+
+[node name="Modes2" type="VBoxContainer" parent="Menu/Panel2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.053645834
+anchor_bottom = 0.09351852
+offset_top = -1.0
+offset_right = 97.0
+offset_bottom = -1.0
+
+[node name="Race" type="Button" parent="Menu/Panel2/Modes2"]
+layout_mode = 2
+text = "Race"
+
+[node name="Freestyle" type="Button" parent="Menu/Panel2/Modes2"]
+layout_mode = 2
+text = "Freestyle
+"
+
+[node name="Time Trials" type="Button" parent="Menu/Panel2/Modes2"]
+layout_mode = 2
+text = "Time trials"
+
+[node name="Viewport Canvas" type="CanvasLayer" parent="."]
+script = ExtResource("16_2w5on")
+
+[node name="Panel" type="Panel" parent="Viewport Canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rgh2o")
+
+[node name="Viewport grid" type="GridContainer" parent="Viewport Canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Level Container" type="Node3D" parent="."]
+script = ExtResource("2_pbw6q")
+
+[node name="SlopePath" type="Node3D" parent="."]
+script = ExtResource("4_rgh2o")
+metadata/_custom_type_script = "uid://bbucmjjyvixrl"

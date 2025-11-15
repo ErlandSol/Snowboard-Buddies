@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://c1j2qrpth847e"]
+
+[ext_resource type="Script" uid="uid://ttgrly0k0bha" path="res://Scripts/Player.gd" id="1_kyqiw"]
+[ext_resource type="PackedScene" uid="uid://dm8vwe2s7f5eg" path="res://Blender/Snowman.blend" id="2_52ee3"]
+[ext_resource type="PackedScene" uid="uid://j6q406ltbkwa" path="res://Blender/snowboard.blend" id="2_kyqiw"]
+[ext_resource type="Script" uid="uid://mgo8ru2j2db6" path="res://Scripts/EditorGizmos.gd" id="3_dewec"]
+[ext_resource type="Texture2D" uid="uid://1nm30va5tfnj" path="res://Textures/Div/arrow_1.png" id="3_gntrk"]
+[ext_resource type="Texture2D" uid="uid://ca7ps7cm6un8" path="res://Textures/Div/circle_1.png" id="5_5ixxa"]
+[ext_resource type="Script" uid="uid://c667tflt3wx5h" path="res://Scripts/PlayerLabel.gd" id="6_nn08x"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rpqav"]
+radius = 0.35
+height = 1.65
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rpqav"]
+radius = 0.29492188
+height = 1.3106384
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("boardMesh")]
+floor_stop_on_slope = false
+script = ExtResource("1_kyqiw")
+boardMesh = NodePath("snowboard")
+
+[node name="Snowman" parent="." instance=ExtResource("2_52ee3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09370072, 0)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.56890804, 0, 0, 0, 0.56890804, 0, 0, 0, 0.56890804, 0, 0.5629595, 0)
+mesh = SubResource("CapsuleMesh_rpqav")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 2.1175824e-22, 3.5527137e-15, 0, 1.0000001, 3.5527137e-15, -3.5527137e-15, 0, 1, -1.0469974e-22, 0.660035, 0)
+shape = SubResource("CapsuleShape3D_rpqav")
+
+[node name="BoardPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15446556, 0)
+
+[node name="snowboard" parent="." instance=ExtResource("2_kyqiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15446556, 0)
+
+[node name="Raycasts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5062875, 0.5)
+
+[node name="Raycast Front Left" type="RayCast3D" parent="Raycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20000005, 0, 0)
+target_position = Vector3(0, -2, 0)
+
+[node name="Raycast Front Right" type="RayCast3D" parent="Raycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000005, 0, 0)
+target_position = Vector3(0, -2, 0)
+
+[node name="Raycast Back Left" type="RayCast3D" parent="Raycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20000005, 0, -1)
+target_position = Vector3(0, -2, 0)
+
+[node name="Raycast Back Right" type="RayCast3D" parent="Raycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000005, 0, -1)
+target_position = Vector3(0, -2, 0)
+
+[node name="Gizmos" type="Node3D" parent="."]
+script = ExtResource("3_dewec")
+
+[node name="Sprite3D" type="Sprite3D" parent="Gizmos"]
+transform = Transform3D(1.4446349, 0, 0, 0, -6.3147e-08, -1.4446349, 0, 1.4446349, -6.3147e-08, 0, 0.24491042, 1.1338272)
+modulate = Color(1, 1, 1, 0.1764706)
+texture = ExtResource("3_gntrk")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Gizmos"]
+transform = Transform3D(2.009396, 0, 0, 0, -8.783349e-08, -2.009396, 0, 2.009396, -8.783349e-08, 0, 0.24491042, 0.0022609234)
+modulate = Color(1, 1, 1, 0.1764706)
+texture = ExtResource("5_5ixxa")
+
+[node name="Label3D" type="Label3D" parent="Gizmos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.731916, 0)
+billboard = 1
+text = "Player"
+script = ExtResource("6_nn08x")

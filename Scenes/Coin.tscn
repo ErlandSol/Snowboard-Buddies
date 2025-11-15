@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6mv5pgidjwq6"]
+
+[ext_resource type="Texture2D" uid="uid://sko6cjmn1dae" path="res://Textures/coin.png" id="1_qrc3l"]
+[ext_resource type="Script" uid="uid://ddb2f7lgkmt3b" path="res://Scripts/Coin.gd" id="1_somhs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_somhs"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Coin" type="Node3D"]
+script = ExtResource("1_somhs")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22285983, 0)
+shape = SubResource("BoxShape3D_somhs")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3.9432461, 0, 0, 0, 3.9432461, 0, 0, 0, 1.8552635, -0.019504191, 0.2568259, 0)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_qrc3l")
+region_rect = Rect2(0, 0, 13, 13)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceq1lyilld02g"]
+
+[ext_resource type="Script" uid="uid://c44bxkus1eo46" path="res://Scripts/Board.gd" id="1_ml4tp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_igt3p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ml4tp"]
+size = Vector3(0.16900635, 0.039794922, 0.5428467)
+
+[node name="Board" type="CharacterBody3D"]
+floor_stop_on_slope = false
+script = ExtResource("1_ml4tp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.3222508e-08, -0.15918733, 0, -2.3222508e-08, -4.440892e-16, 0.030864127, 0.5312691, -6.9582993e-09, 1.3491137e-09, 0, 0, 0)
+mesh = SubResource("BoxMesh_igt3p")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00064086914, 0.0015869141, -6.1035156e-05)
+shape = SubResource("BoxShape3D_ml4tp")

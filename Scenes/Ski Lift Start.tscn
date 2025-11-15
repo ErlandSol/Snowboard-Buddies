@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://d3nvgntmswx1n"]
+
+[ext_resource type="Script" uid="uid://dgbi8q165hbm4" path="res://Scripts/SkiLiftStart.gd" id="1_qu5np"]
+[ext_resource type="Script" uid="uid://mgo8ru2j2db6" path="res://Scripts/EditorGizmos.gd" id="2_lg3k7"]
+[ext_resource type="Texture2D" uid="uid://ca7ps7cm6un8" path="res://Textures/Div/circle_1.png" id="3_wcr7p"]
+[ext_resource type="Texture2D" uid="uid://1nm30va5tfnj" path="res://Textures/Div/arrow_1.png" id="4_144rh"]
+[ext_resource type="Texture2D" uid="uid://ddq4kbln3d5ke" path="res://Textures/Div/ski_lift_pin.png" id="5_lg3k7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_k1gao"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_qu5np"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qu5np"]
+cull_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qu5np"]
+size = Vector3(3, 1, 3)
+
+[node name="Ski Lift Start" type="Node3D" node_paths=PackedStringArray("anchor")]
+script = ExtResource("1_qu5np")
+anchor = NodePath("Anchor")
+
+[node name="Anchor" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.17372912, 0, 0, 0, 0.17372912, 0, 0, 0, 0.17372912, 0.013666093, 1.7787201, -0.0059834123)
+visible = false
+mesh = SubResource("BoxMesh_k1gao")
+
+[node name="Line" type="Node3D" parent="."]
+visible = false
+
+[node name="LineMesh" type="MeshInstance3D" parent="Line"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 0.12816566, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("QuadMesh_qu5np")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_qu5np")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_qu5np")
+debug_color = Color(0.9999998, 0.014054468, 0.037908163, 0.41960785)
+
+[node name="Gizmos" type="Node3D" parent="Area3D"]
+unique_name_in_owner = true
+script = ExtResource("2_lg3k7")
+
+[node name="Sprite3D" type="Sprite3D" parent="Area3D/Gizmos"]
+transform = Transform3D(3, 0, 0, 0, -1.3113416e-07, 3, 0, -3, -1.3113416e-07, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("3_wcr7p")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Area3D/Gizmos"]
+transform = Transform3D(3, 0, -4.2351647e-21, 1.2705494e-21, -1.3113416e-07, 3, 0, -3, -1.3113416e-07, 0, 0, 2)
+texture_filter = 0
+texture = ExtResource("4_144rh")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Area3D/Gizmos"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.216, 0)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_lg3k7")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

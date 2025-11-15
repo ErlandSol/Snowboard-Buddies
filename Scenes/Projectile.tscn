@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://bc4q8ewew1svk"]
+
+[ext_resource type="Script" uid="uid://b34aljaoe5hpp" path="res://Scripts/Projectile.gd" id="1_lal66"]
+[ext_resource type="Script" uid="uid://mgo8ru2j2db6" path="res://Scripts/EditorGizmos.gd" id="2_0tri7"]
+[ext_resource type="Texture2D" uid="uid://1nm30va5tfnj" path="res://Textures/Div/arrow_1.png" id="3_ds7j7"]
+[ext_resource type="Texture2D" uid="uid://ca7ps7cm6un8" path="res://Textures/Div/circle_1.png" id="4_5i1ty"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lal66"]
+albedo_color = Color(0.6969843, 0.27727285, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lal66"]
+material = SubResource("StandardMaterial3D_lal66")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k1cl8"]
+radius = 0.1069611
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lal66"]
+height = 0.95358276
+radius = 1.6455078
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lal66"]
+radius = 0.29972708
+
+[node name="Projectile" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_lal66")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.38021475, 0, 0, 0, 0.38021475, 0, 0, 0, 0.38021475, 0, 0.19275177, 0)
+mesh = SubResource("SphereMesh_lal66")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19275177, 0)
+shape = SubResource("SphereShape3D_k1cl8")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19275177, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.008956909, 1.1090953)
+shape = SubResource("CylinderShape3D_lal66")
+
+[node name="Hitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19275177, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_lal66")
+
+[node name="Gizmos" type="Node3D" parent="."]
+script = ExtResource("2_0tri7")
+enabledInPlayMode = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Gizmos"]
+transform = Transform3D(1.4446349, 0, 0, 0, -6.3147e-08, -1.4446349, 0, 1.4446349, -6.3147e-08, 0, 0.0019965768, 0.8462678)
+modulate = Color(1, 1, 1, 0.1764706)
+texture = ExtResource("3_ds7j7")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Gizmos"]
+transform = Transform3D(1.0740628, 0, 0, 0, -4.6948777e-08, -1.0740628, 0, 1.0740628, -4.6948777e-08, 0, -0.0066812634, 0.0022609234)
+modulate = Color(1, 1, 1, 0.1764706)
+texture = ExtResource("4_5i1ty")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

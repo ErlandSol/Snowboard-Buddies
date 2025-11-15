@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b37rv3x4ut1v"]
+
+[ext_resource type="Texture2D" uid="uid://pu4xxi3dh24k" path="res://Blender/models test_tree snowy.png" id="1_bg24x"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bg24x"]
+height = 3.574829
+radius = 0.20117188
+
+[node name="Tree" type="Sprite3D"]
+offset = Vector2(0, 33.07)
+pixel_size = 0.06
+billboard = 2
+shaded = true
+double_sided = false
+texture = ExtResource("1_bg24x")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2839966, 0)
+shape = SubResource("CylinderShape3D_bg24x")

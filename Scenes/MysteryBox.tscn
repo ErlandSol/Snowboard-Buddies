@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://3ccf45gomiwj"]
+
+[ext_resource type="Script" uid="uid://bkt3sl64mqajv" path="res://Scenes/MysteryBox.gd" id="1_75ppq"]
+[ext_resource type="Texture2D" uid="uid://dghmxn7616aim" path="res://Textures/Div/questionbox.png" id="2_r8m2f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_75ppq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xj4hm"]
+albedo_texture = ExtResource("2_r8m2f")
+
+[sub_resource type="BoxMesh" id="BoxMesh_r8m2f"]
+material = SubResource("StandardMaterial3D_xj4hm")
+
+[node name="MysteryBox" type="Node3D"]
+script = ExtResource("1_75ppq")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49587834, 0)
+shape = SubResource("BoxShape3D_75ppq")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7045735, 0.7096294, -0.0014640838, -0.5786561, 0.5733364, -0.5800367, -0.41077173, 0.40952554, 0.814589, 0, 1, 0)
+mesh = SubResource("BoxMesh_r8m2f")

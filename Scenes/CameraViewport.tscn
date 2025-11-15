@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfhd2xcmkf367"]
+
+[ext_resource type="PackedScene" uid="uid://6nb84tt6jxwr" path="res://Scenes/HingedCamera.tscn" id="1_0h5g3"]
+[ext_resource type="Script" uid="uid://dq8ye6dmv13em" path="res://Scripts/CameraViewport.gd" id="1_15dgp"]
+[ext_resource type="Texture2D" uid="uid://dlrcb3qcmp1d3" path="res://icon.svg" id="3_hkyrx"]
+
+[node name="Camera Viewport" type="SubViewportContainer" node_paths=PackedStringArray("cameraController", "speed_effect_color_rect")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+script = ExtResource("1_15dgp")
+cameraController = NodePath("SubViewport/Hinged Camera")
+speed_effect_color_rect = NodePath("")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+msaa_3d = 1
+use_debanding = true
+size = Vector2i(1920, 1080)
+size_2d_override = Vector2i(1920, 1080)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Hinged Camera" parent="SubViewport" instance=ExtResource("1_0h5g3")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 47.972004
+anchor_bottom = 27.003002
+offset_left = 15.0
+offset_top = 940.0
+offset_right = -1775.8801
+offset_bottom = -12.120117
+texture = ExtResource("3_hkyrx")
+stretch_mode = 4
+
+[node name="LapLabel" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 47.984
+anchor_bottom = 26.978
+offset_left = 40.0
+offset_top = 34.0
+offset_right = -1603.3601
+offset_bottom = -938.12
+theme_override_font_sizes/font_size = 78
+text = "Lap 1/3"
+
+[node name="PositionLabel" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 47.984
+anchor_bottom = 26.978
+offset_left = 161.0
+offset_top = 954.0
+offset_right = -1482.3601
+offset_bottom = -18.119995
+theme_override_font_sizes/font_size = 78
+text = "1st"

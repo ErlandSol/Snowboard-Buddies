@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn0rpf87l260x"]
+
+[ext_resource type="Script" uid="uid://7xfo2wq7ji5j" path="res://Scripts/Level.gd" id="1_22ew2"]
+[ext_resource type="PackedScene" uid="uid://b3wyxy3iuasgv" path="res://Blender/Geometry Nodes/Path.blend" id="2_1nre2"]
+
+[node name="Peaceful Peaks" type="Node3D"]
+script = ExtResource("1_22ew2")
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Path" parent="Terrain" instance=ExtResource("2_1nre2")]

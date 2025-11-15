@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://6nb84tt6jxwr"]
+
+[ext_resource type="Script" uid="uid://haoau0kekyp8" path="res://CameraController.gd" id="1_esb6o"]
+[ext_resource type="Script" uid="uid://mgo8ru2j2db6" path="res://Scripts/EditorGizmos.gd" id="2_w2msm"]
+[ext_resource type="Texture2D" uid="uid://1nm30va5tfnj" path="res://Textures/Div/arrow_1.png" id="3_apctn"]
+[ext_resource type="Texture2D" uid="uid://ca7ps7cm6un8" path="res://Textures/Div/circle_1.png" id="4_fmesg"]
+
+[node name="Hinged Camera" type="Node3D"]
+script = ExtResource("1_esb6o")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 2.5559947e-08, -8.360282e-08, 9.8070885e-09, 0.9830668, 0.18324795, 8.687095e-08, 0.18324795, -0.9830668, 0, 1.9675672, -3.069)
+
+[node name="Gizmos" type="Node3D" parent="."]
+script = ExtResource("2_w2msm")
+
+[node name="Sprite3D" type="Sprite3D" parent="Gizmos"]
+transform = Transform3D(1.4446349, 0, 0, 0, -6.3147e-08, -1.4446349, 0, 1.4446349, -6.3147e-08, 0, 0, 1.1338272)
+modulate = Color(1, 1, 1, 0.13333334)
+texture = ExtResource("3_apctn")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Gizmos"]
+transform = Transform3D(1.444635, 0, 0, 0, -0.92387235, -1.1105992, 0, 1.1105992, -0.92387235, 0, 1.8713381, -2.5977235)
+modulate = Color(1, 1, 1, 0.23529412)
+texture = ExtResource("3_apctn")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Gizmos"]
+transform = Transform3D(2.009396, 0, 0, 0, -8.783349e-08, -2.009396, 0, 2.009396, -8.783349e-08, 0, 0, 0.0022609234)
+modulate = Color(1, 1, 1, 0.14117648)
+texture = ExtResource("4_fmesg")

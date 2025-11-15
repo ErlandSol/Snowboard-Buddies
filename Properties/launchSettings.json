@@ -1,0 +1,19 @@
+
+{
+  "profiles": {
+	"Godot Debug": {
+	  "commandName": "Executable",
+	  "executablePath": "C:/Program Files/Godot/4.5.1/Godot.exe",
+	  "commandLineArgs": "--path . --verbose",
+	  "workingDirectory": ".",
+	  "nativeDebugging": true
+	},
+	"Godot Debug Hinged Camera": {
+	  "commandName": "Executable",
+	  "executablePath": "C:/Program Files/Godot/4.5.1/Godot.exe",
+	  "commandLineArgs": "--upwards ./Scenes/HingedCamera.tscn --verbose",
+	  "workingDirectory": ".",
+	  "nativeDebugging": true
+	}
+  }
+}

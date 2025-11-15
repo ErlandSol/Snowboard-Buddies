@@ -1,0 +1,60 @@
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://cdhb6w4nj2q5e"]
+
+[ext_resource type="Shader" uid="uid://cy07mnwnsvbdy" path="res://Shaders/Aurora.gdshader" id="1_nmk1j"]
+
+[sub_resource type="Gradient" id="Gradient_pbw6q"]
+offsets = PackedFloat32Array(0, 0.27894738, 0.39736843, 0.6105263, 0.69736844, 0.76842105, 0.85, 0.9289474, 1)
+colors = PackedColorArray(0, 1, 0.13333334, 1, 0.022583002, 0.98224133, 0.2206235, 1, 0.22421694, 0.8236819, 0.9999998, 1, 0.9485794, 0, 0.53414977, 1, 0.97164124, 0.09297299, 0, 1, 0.9243267, 1.1551381e-06, 0.48198056, 1, 0, 0.79856414, 0.97336775, 1, 0, 0.9376773, 0.39323354, 1, 0, 1, 0.13333344, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v1gob"]
+gradient = SubResource("Gradient_pbw6q")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_nmk1j"]
+offsets = PackedFloat32Array(0, 0.23191094, 0.54545456, 0.6827458, 0.70315397, 0.7179963, 0.8181818, 0.9424861, 1)
+colors = PackedColorArray(0, 1, 0.13333334, 1, 0.022583002, 0.98224133, 0.2206235, 1, 0.22421694, 0.8236819, 0.9999998, 1, 0.9485794, 0, 0.53414977, 1, 0.97164124, 0.09297299, 0, 1, 0.9243267, 1.1551381e-06, 0.48198056, 1, 0, 0.79856414, 0.97336775, 1, 0, 0.9376773, 0.39323354, 1, 0, 1, 0.13333344, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mlpp"]
+noise_type = 4
+frequency = 0.0061
+fractal_octaves = 2
+fractal_lacunarity = 8.217
+fractal_gain = -0.044
+domain_warp_type = 2
+domain_warp_amplitude = 26.396
+domain_warp_fractal_octaves = 2
+domain_warp_fractal_lacunarity = 4.094
+domain_warp_fractal_gain = 0.345
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0l70v"]
+width = 8
+height = 8
+noise = SubResource("FastNoiseLite_7mlpp")
+color_ramp = SubResource("Gradient_nmk1j")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jw32o"]
+frequency = 0.0061
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_50glp"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_jw32o")
+seamless = true
+seamless_blend_skirt = 0.25
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_nmk1j")
+shader_parameter/speed = 0.003
+shader_parameter/color = Color(4.0911138e-07, 0.4246121, 0.2227779, 1)
+shader_parameter/emission_strength = 20.0
+shader_parameter/noise = SubResource("NoiseTexture2D_50glp")
+shader_parameter/offset = 0.0
+shader_parameter/smoothness = 0.204
+shader_parameter/distort = 0.317
+shader_parameter/scale = -0.286
+shader_parameter/gradient = SubResource("GradientTexture2D_v1gob")
+shader_parameter/gradient2 = SubResource("NoiseTexture2D_0l70v")
+shader_parameter/STEP = 0.01
+shader_parameter/BASE_DENSITY = 0.089
