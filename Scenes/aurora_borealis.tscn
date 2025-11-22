@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsg1v7w1tsfno"]
+
+[ext_resource type="Material" uid="uid://cdhb6w4nj2q5e" path="res://Aurora Borealis.tres" id="1_mdx85"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pbw6q"]
+
+[node name="Aurora Borealis" type="Node3D"]
+transform = Transform3D(989.5912, -28.777971, -2.2280207, -143.8895, -197.91875, 0.32411817, -2.2514718, -3.0452418e-05, -999.9975, 0, 0, 0)
+
+[node name="Aurora Borealis2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.99999994, 1.9312079e-09, 2.3283064e-10, -5.7851867e-08, 0.9999999, 1.4853185e-10, 0, -4.8210325e-12, 0.99999994, 0, 0, 0)
+mesh = SubResource("PlaneMesh_pbw6q")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("1_mdx85")
+
+[node name="Aurora Borealis3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.866249, 0.028543243, 0.47879472, -0.26708105, 0.9792955, -0.97630197, -0.49674845, 0.028713746, 0.8559373, -0.9057354, 0.49742624, -0.971112)
+mesh = SubResource("PlaneMesh_pbw6q")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("1_mdx85")
+
+[node name="Aurora Borealis4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.958589, 0.056956857, 0.002251598, -1.4239249, 0.95859134, 1.3480721e-06, -0.0021582851, -0.00012829296, 0.99999744, -1.8364499, 1.2883306, -0.2226794)
+mesh = SubResource("PlaneMesh_pbw6q")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("1_mdx85")
+
+[node name="Aurora Borealis5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9895912, 0.028413605, 0.02293237, -0.7194486, 0.9792955, 0.7119631, -0.0022281294, -0.028842045, 0.9895445, -0.9397192, 0.47852135, 0.74853134)
+mesh = SubResource("PlaneMesh_pbw6q")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("1_mdx85")

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dq8ye6dmv13em" path="res://Scripts/CameraViewport.gd" id="1_15dgp"]
 [ext_resource type="Texture2D" uid="uid://dlrcb3qcmp1d3" path="res://icon.svg" id="3_hkyrx"]
 
-[node name="Camera Viewport" type="SubViewportContainer" node_paths=PackedStringArray("cameraController", "speed_effect_color_rect")]
+[node name="Camera Viewport" type="SubViewportContainer" node_paths=PackedStringArray("cameraController")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,12 +15,10 @@ size_flags_vertical = 3
 stretch = true
 script = ExtResource("1_15dgp")
 cameraController = NodePath("SubViewport/Hinged Camera")
-speed_effect_color_rect = NodePath("")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
-msaa_3d = 1
-use_debanding = true
+anisotropic_filtering_level = 1
 size = Vector2i(1920, 1080)
 size_2d_override = Vector2i(1920, 1080)
 size_2d_override_stretch = true

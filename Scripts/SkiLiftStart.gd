@@ -45,7 +45,7 @@ func stretch_quad_between_points():
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body is Player:
+	if body is PlayerAgent:
 		body.position = end.position
 		body.rotation = end.rotation
 		body.velocity = Vector3.ZERO

@@ -46,9 +46,6 @@ const PROJECTILE = preload("uid://bc4q8ewew1svk")
 
 
 
-
-
-
 func _ready():
 	DebugDraw3D.scoped_config().set_thickness(0.02).set_center_brightness(0.5)
 
@@ -120,44 +117,55 @@ func _process(delta: float) -> void:
 		#cameraViewport.apply_effect(velocity.dot(forwardDirection)*0.05)
 	
 
-func _physics_process(delta: float) -> void:
-	
-	if not snowman:
-		if NPC: NPCInput(delta)
-		else: PlayerInput(delta)
-		
-		
+func updateDirections():
 	forwardDirection = transform.basis.z.normalized()
 	sideDirection = transform.basis.x.normalized()
 	upDirection = transform.basis.y.normalized()
 
-	if is_on_floor():
-		var normal = GetRaycastNormal()
-		currentFloorNormal = currentFloorNormal.lerp(normal,delta*5)
-		AlignWithGround(currentFloorNormal,delta)
-		
-		var acceleration = delta * forwardDirection * currentFloorNormal.dot(forwardDirection) * 3000
-		velocity += acceleration * delta
-		var sideNormal = currentFloorNormal.dot(sideDirection.normalized())
-		if sign(sideNormal) == sign(xInput) or NPC:
-			rotate_y(sideNormal*0.02)
-		var yVelocity = velocity.y
-		velocity.y = 0
-		velocity = velocity.length() * forwardDirection * sign(velocity.dot(forwardDirection))
-		velocity.y = yVelocity
-		
-	var turnVelocity = 17 * 0.001 * xInput
-	rotation.y += turnVelocity
+func GroundedBehaviour(delta):
+	var normal = GetRaycastNormal()
+	currentFloorNormal = currentFloorNormal.lerp(normal,delta*5)
+	AlignWithGround(currentFloorNormal,delta)
+	
+	var acceleration = delta * forwardDirection * currentFloorNormal.dot(forwardDirection) * 3000
+	velocity += acceleration * delta
+	var sideNormal = currentFloorNormal.dot(sideDirection.normalized())
+	if sign(sideNormal) == sign(xInput) or NPC:
+		rotate_y(sideNormal*0.02)
+	var yVelocity = velocity.y
+	velocity.y = 0
+	velocity = velocity.length() * forwardDirection * sign(velocity.dot(forwardDirection))
+	velocity.y = yVelocity	
 
+func ClampVelocity():
 	velocity.x = clamp(velocity.x, -20,20)
-	velocity.z = clamp(velocity.z, -20,20)
+	velocity.z = clamp(velocity.z, -20,20)	
+
+func ApplyGravity(delta):
 	velocity += Vector3.DOWN * 10 * delta
 
+func JumpLogic():
 	if jumpBuffer.should_run_action():
 		velocity.y = 3
-		velocity += forwardDirection.normalized() * 1.5
-	move_and_slide()
+		velocity += forwardDirection.normalized() * 1.5	
 
+func TurnLogic(delta):
+	var turnVelocity = 17 * 0.001 * xInput
+	rotation.y += turnVelocity	
+	
+func _physics_process(delta: float) -> void:	
+	if not snowman:
+		if NPC: NPCInput(delta)
+		else: PlayerInput(delta)
+
+	if is_on_floor():
+		GroundedBehaviour(delta)
+
+	TurnLogic(delta)
+	ClampVelocity()
+	ApplyGravity(delta)
+	JumpLogic()
+	move_and_slide()
 
 func AlignWithGround(normal: Vector3, delta: float) -> void:
 	xform = boardMesh.global_transform
